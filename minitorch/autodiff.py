@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Any, Iterable, List, Tuple
+from typing import Any, Iterable, List, Tuple, Set
 
 from typing_extensions import Protocol
 
@@ -52,7 +52,7 @@ class Variable(Protocol):
         pass
 
 
-def topological_sort(variable: Variable, visited: set[int]=set()) -> List[Variable]:
+def topological_sort(variable: Variable, visited: Set[int]=set()) -> Iterable[Variable]:
     """
     Computes the topological order of the computation graph.
 
