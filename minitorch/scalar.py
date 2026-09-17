@@ -105,6 +105,9 @@ class Scalar:
 
     def __eq__(self, b: ScalarLike) -> Scalar:  # type: ignore[override]
         return EQ.apply(self, b)
+        # if isinstance(b, Scalar):
+        #     return Scalar(self.unique_id == b.unique_id)
+        # return EQ.apply(self, b)
 
     def __sub__(self, b: ScalarLike) -> Scalar:
         return Add.apply(self, Neg.apply(b))
@@ -117,6 +120,9 @@ class Scalar:
 
     def __rmul__(self, b: ScalarLike) -> Scalar:
         return self * b
+
+    def __hash__(self):
+        return hash(self.unique_id)
 
     def log(self) -> Scalar:
         return Log.apply(self)
@@ -164,19 +170,15 @@ class Scalar:
             return []
 
         if self.is_leaf():
-            self.accumulate_derivative(d_output)
-            return [(self, self.derivative)]
+            #self.accumulate_derivative(d_output)
+            return []
 
 
         ders = h.last_fn._backward(h.ctx, d_output)
-        derivatives = []
-        for i, d in zip(self.parents, ders):
-            derivatives.extend(i.chain_rule(d))
-        #unduplicated = {}
-        #for s, d in derivatives:
-            #unduplicated[s] = d
-        #return unduplicated.items()
-        return derivatives
+        #derivatives = []
+        # for i, d in zip(self.parents, ders):
+        #     derivatives.extend(i.chain_rule(d))
+        return zip(self.parents, ders)
 
     def backward(self, d_output: Optional[float] = None) -> None:
         """

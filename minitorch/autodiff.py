@@ -52,7 +52,7 @@ class Variable(Protocol):
         pass
 
 
-def topological_sort(variable: Variable) -> Iterable[Variable]:
+def topological_sort(variable: Variable, visited: set[int]=set()) -> Iterable[Variable]:
     """
     Computes the topological order of the computation graph.
 
@@ -62,8 +62,14 @@ def topological_sort(variable: Variable) -> Iterable[Variable]:
     Returns:
         Non-constant Variables in topological order starting from the right.
     """
-    # TODO: Implement for Task 1.4.
-    raise NotImplementedError('Need to implement for Task 1.4')
+    l = []
+    for i in variable.parents:
+        if i.unique_id not in visited:
+            l.extend(topological_sort(i, visited))
+    visited.add(variable.unique_id)
+    l.append(variable)
+    return l
+
 
 
 def backpropagate(variable: Variable, deriv: Any) -> None:
@@ -77,8 +83,16 @@ def backpropagate(variable: Variable, deriv: Any) -> None:
 
     No return. Should write to its results to the derivative values of each leaf through `accumulate_derivative`.
     """
-    # TODO: Implement for Task 1.4.
-    raise NotImplementedError('Need to implement for Task 1.4')
+    int_ders = {variable.unique_id: deriv}
+    order = topological_sort(variable)[::-1]
+    for i in order:
+        ders = i.chain_rule(int_ders[i.unique_id])
+        for var, der in ders:
+            if var.is_leaf():
+                var.accumulate_derivative(der)
+            int_ders[var.unique_id] = int_ders.get(var.unique_id, 0) + der
+        
+
 
 
 @dataclass
