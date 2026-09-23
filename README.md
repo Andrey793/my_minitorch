@@ -1,5 +1,5 @@
 # minitorch 1.5
-#### Simple:
+### Simple:
 PTS = 50
 HIDDEN = 5
 RATE = 0.005
@@ -53,8 +53,8 @@ Epoch  460  loss  36.64088909938953 correct 24
 Epoch  470  loss  36.592178955204886 correct 24
 Epoch  480  loss  36.54460506289358 correct 24
 Epoch  490  loss  36.49814270545964 correct 24
-Epoch  500  loss  36.45276761735696 correct 24
----
+Epoch  500  loss  36.45276761735696 correct 24 
+
 #### Diag
 PTS = 50
 HIDDEN = 5
@@ -111,14 +111,14 @@ Epoch  470  loss  21.690043506437974 correct 43
 Epoch  480  loss  21.6810517596098 correct 43
 Epoch  490  loss  21.67209433112594 correct 43
 Epoch  500  loss  21.66317117381911 correct 43
----
+
 
 #### Split
 PTS = 50
 HIDDEN = 8
 RATE = 5e-6
 
-----
+---
 Epoch  10  loss  34.71662893147172 correct 19
 Epoch  20  loss  34.71261274906044 correct 19
 Epoch  30  loss  34.70860949435521 correct 19
@@ -169,14 +169,14 @@ Epoch  470  loss  34.506554929303 correct 25
 Epoch  480  loss  34.50038602905542 correct 25
 Epoch  490  loss  34.49412716560565 correct 25
 Epoch  500  loss  34.48768097064042 correct 24
-----
+
 
 #### Xor
 PTS = 50
 HIDDEN = 9
 RATE = 1e-6
 
-----
+---
 Epoch  10  loss  44.2146749438523 correct 22
 Epoch  20  loss  44.214010779109756 correct 22
 Epoch  30  loss  44.213346651153245 correct 22
@@ -227,4 +227,3 @@ Epoch  470  loss  44.18416141432627 correct 22
 Epoch  480  loss  44.18349894004216 correct 22
 Epoch  490  loss  44.18283650246856 correct 22
 Epoch  500  loss  44.18217410160381 correct 22
----
